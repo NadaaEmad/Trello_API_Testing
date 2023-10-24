@@ -1,0 +1,1147 @@
+{
+	"info": {
+		"_postman_id": "9818eeff-8f93-4066-ab0c-3fbed1d37108",
+		"name": "Trello Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18927161"
+	},
+	"item": [
+		{
+			"name": "Create Board",
+			"item": [
+				{
+					"name": "Create Board - Successfully",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"//Test Case 1 : Verify that the board is created succesfully with response code 200 and the response has the Id attribute\r",
+									"pm.test(\"Verify that the board is created succesfully\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(jsonData.id).to.exist; \r",
+									"\r",
+									"    pm.environment.set(\"boardID\", jsonData.id);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"//Test Case 2 : Verify the response has the required \"name\" attribute\r",
+									"pm.test(\"Verify the response has the required name attribute \", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property('name');\r",
+									"    console.log(jsonData.name);\r",
+									"});\r",
+									"//Test Case 3 : Verify that the response contains correct name\r",
+									"pm.test(\"Verify that the response contains correct name\", function () {\r",
+									"\r",
+									"    var responseName = jsonData.name;\r",
+									"    var requestName = pm.environment.get(\"boardName\");\r",
+									"    pm.expect(responseName).to.equal(requestName);\r",
+									"});\r",
+									"// Test Case 4 : Verify that closed field is false and permission level is private\r",
+									"pm.test(\"Test Case 4 : Verify that closed field is false and permission level is private\", function () {\r",
+									"\r",
+									"    pm.expect(jsonData.closed).to.eql(false);\r",
+									"    pm.expect(jsonData.prefs.permissionLevel).to.eql(\"private\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/?name={{boardName}}&key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "{{boardName}}"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Board -  Missing name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"//Test Case 5 : Check if the response status code is 400 (Bad Request) when \"name\" parameter is missing\r",
+									"pm.test(\"Verify response status code and error message for missing 'name' parameter\", function() {\r",
+									"    pm.response.to.have.status(400); // Check for 400 Bad Request status code\r",
+									"\r",
+									"    pm.expect(jsonData).to.have.property('error');\r",
+									"    pm.expect(jsonData.message).to.include('name'); // Check if the error message contains 'name'\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/?name=&key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								},
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Board - Missing API key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Test Case 6 : Missing API key\r",
+									"pm.test(\"Create Board - Missing API Key\", function() {\r",
+									"    pm.response.to.have.status(401); // Unauthorized \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/?name=&key=&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								},
+								{
+									"key": "key",
+									"value": ""
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Board - Missing Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//Test Case 7 : Missing Token\r",
+									"pm.test(\"Create Board - Missing Token\", function() {\r",
+									"    pm.response.to.have.status(401); // Unauthorized\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/?name=Board1&key={{key}}&token=",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Board1"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update Board",
+			"item": [
+				{
+					"name": "Update Board - Successfully",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"//Test Case 1 : Verify the response has the required \"id\" attribute\r",
+									"pm.test(\"Verify the response has the required id attribute \", function () {\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    //console.log(jsonData.id);\r",
+									"    \r",
+									"\r",
+									"});\r",
+									"\r",
+									"//Test Case 2 : Verify that the response contains correct id\r",
+									"pm.test(\"Verify that the response contains correct id\", function () {\r",
+									"\r",
+									"    var responseName = jsonData.id;\r",
+									"    var requestName = pm.environment.get(\"boardID\");\r",
+									"    //console.log( pm.environment.get(\"boardID\"));\r",
+									"    pm.expect(responseName).to.equal(requestName);\r",
+									"});\r",
+									"\r",
+									"//Test Case 3 : Verify that the response contains correct name\r",
+									"pm.test(\"Verify that the response contains correct name\", function () {\r",
+									"\r",
+									"    var responseName = jsonData.name;\r",
+									"    var requestName = pm.environment.get(\"boardName\");\r",
+									"    //console.log( pm.environment.get(\"boardName\"));\r",
+									"   \r",
+									"    pm.expect(responseName).to.equal(requestName);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/{{boardID}}?key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Board - Wrong id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.text();\r",
+									"\r",
+									"// Test Case 4 : Verify that the response code is 400 Bad Request in case of a wrong id\r",
+									"pm.test(\"Verify that the response code is 400 Bad Request in case of a wrong id\", function () {\r",
+									"    pm.response.to.have.status(400); //Bad Request\r",
+									"\r",
+									"});\r",
+									"// Test Case 5 : Verify that the response contains a meaningful message 'id'\r",
+									"pm.test(\"Verify that the response code is 400 Bad Request in case of a wrong id\", function () {\r",
+									"    pm.expect(responseData).to.include('id');\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/wrongID?key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"wrongID"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Board - Null id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.text();\r",
+									"// Test Case 6 : Verify that the response code is 404 Not Found in case of a null id\r",
+									"pm.test(\"Verify that the response code is 404 Not Found in case of a null id\", function () {\r",
+									"    pm.response.to.have.status(404); //Bad Request\r",
+									"\r",
+									"});\r",
+									"// Test Case 7 : Verify that the response contains a meaningful message contains 'id'\r",
+									"pm.test(\"Verify that the response contains a meaningful message contains 'id'\", function () {\r",
+									"     pm.expect(responseData).to.include('id');\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/?key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								""
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Add Member to a Board",
+			"item": [
+				{
+					"name": "Add Member to a Board - Successfully",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"// Test Case 1 : Verify New Member Added\r",
+									"pm.test(\"Verify New Member Added\", function() {\r",
+									"    pm.response.to.have.status(200); \r",
+									"\r",
+									"    var memberID = pm.collectionVariables.get(\"memberID\");\r",
+									"    var members = jsonData.members;\r",
+									"\r",
+									"    console.log(memberID);\r",
+									"\r",
+									"    var isMemberAdded = members.some(function(member) {\r",
+									"        return member.username === memberID;\r",
+									"    });\r",
+									"\r",
+									"    pm.expect(isMemberAdded).to.be.true; // The new member's ID should exist in the members list\r",
+									"});\r",
+									"// Test Case 2 : Verify member type is correct\r",
+									"pm.test(\"Verify member type is correct\", function() {\r",
+									"\r",
+									"    var memberType = pm.collectionVariables.get(\"memberType\");\r",
+									"    var members = jsonData.members;\r",
+									"\r",
+									"    console.log(memberType);\r",
+									"\r",
+									"    var isMemberAdded = members.some(function(member) {\r",
+									"        return member.memberType === memberType;\r",
+									"    });\r",
+									"\r",
+									"    pm.expect(isMemberAdded).to.be.true; // The new member's ID should exist in the members list\r",
+									"});\r",
+									"// Test Case 3 : Verify member added to the right board\r",
+									"pm.test(\"Verify member added to the right board\", function() {\r",
+									"\r",
+									"\r",
+									"    var boardID = pm.environment.get(\"boardID\");\r",
+									"    var responseID = jsonData.id;\r",
+									"\r",
+									"    pm.expect(boardID).to.be.eql(responseID);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/{{boardID}}/members/{{memberID}}?type={{memberType}}&key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}",
+								"members",
+								"{{memberID}}"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "{{memberType}}"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a member to a Board - Wrong member id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test Case 4 : Verify that the response code is 400 Bad Request in case of a wrong member id\r",
+									"pm.test(\"Verify that the response code is 400 Bad Request in case of a wrong member id\", function () {\r",
+									"    pm.response.to.have.status(400); //Bad Request\r",
+									"\r",
+									"});\r",
+									"\r",
+									"//Test Case 5 : Check if the response has property error and contains'id'\r",
+									"pm.test(\"Check if the response has property error and contains id\", function (){\r",
+									"     pm.expect(jsonData).to.have.property('error');\r",
+									"     pm.expect(jsonData.message).to.include('id'); // Check if the error message contains 'id'\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/{{boardID}}/members/wrongID?type={{memberType}}&key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}",
+								"members",
+								"wrongID"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "{{memberType}}"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a member to a Board - Wrong member type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.text();\r",
+									"\r",
+									"// Test Case 6 : Verify that the response code is 400 Bad Request in case of a wrong member type\r",
+									"pm.test(\"Verify that the response code is 400 Bad Request in case of a wrong member type\", function () {\r",
+									"    pm.response.to.have.status(400); //Bad Request\r",
+									"\r",
+									"});\r",
+									"\r",
+									"//Test Case 7 : Check if error message contains 'type'\r",
+									"pm.test(\"Check if the error message contains 'type'\", function (){\r",
+									"     pm.expect(responseData).to.include('type'); // Check if the error message contains 'type'\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/{{boardID}}/members/{{memberID}}?type=wrongType&key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}",
+								"members",
+								"{{memberID}}"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "wrongType"
+								},
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get the members of a board",
+			"item": [
+				{
+					"name": "Get members of a board - successfully",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"// Test Case 1 : Verify that the members retrieved successfully - array is not empty\r",
+									"pm.test(\"Verify that the members retrieved successfully - array is not empty\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(jsonData).to.be.an('array').that.is.not.empty; // Check if the response is a non-empty array\r",
+									"});\r",
+									"// Test Case 2 : Verify that member data contains id\r",
+									"pm.test(\"Verify that member data contains id\", function () {\r",
+									"    pm.expect(jsonData[0]).to.have.property(\"id\");\r",
+									"});\r",
+									"// Test Case 3 : Verify that member data contains fullName\r",
+									"pm.test(\"erify that member data contains fullName\", function () {\r",
+									"    pm.expect(jsonData[0]).to.have.property(\"fullName\");\r",
+									"});\r",
+									"// Test Case 4 : Verify that member data contains username\r",
+									"pm.test(\"erify that member data contains username\", function () {\r",
+									"    pm.expect(jsonData[0]).to.have.property(\"username\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/{{boardID}}/members?key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}",
+								"members"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get members of a board - invalid board id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.text();\r",
+									"// Test Case 5 : Retrieve Board Members - Invalid Board ID\r",
+									"pm.test(\"Retrieve Board Members - Invalid Board ID\", function() {\r",
+									"    pm.response.to.have.status(400); // Assuming 400 bad request status code for an invalid board ID\r",
+									"});\r",
+									"// Test Case 6 :  Check if the error message contains 'id'\r",
+									"pm.test(\"Check if the error message contains 'id'\", function() {\r",
+									"    pm.expect(responseData).to.include('id');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/wrongID/members?key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"wrongID",
+								"members"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Remove member from a board",
+			"item": [
+				{
+					"name": "Remove member from a board - success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test Case 1 : Verify that the member is deleted successfully and the response code is 200\r",
+									"pm.test(\"Verify that the member is deleted successfully and the response code is 200\", function (){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"// Test Case 2 : Verify that the member is no longer in the members list\r",
+									"pm.test(\"Verify that the member is no longer in the members list\", function (){\r",
+									" \r",
+									"    var memberID = pm.collectionVariables.get(\"memberID\");\r",
+									"    var members = jsonData.members;\r",
+									"\r",
+									"    var isMemberDeleted = members.some(function(member) {\r",
+									"        return member.username === memberID;\r",
+									"    });\r",
+									"\r",
+									"    pm.expect(isMemberDeleted).to.be.false;\r",
+									"});\r",
+									"// Test Case 3 : Check if the response contains correct property 'id'\r",
+									"pm.test(\"Check if the response contains correct property 'id'\", function (){\r",
+									"    pm.expect(jsonData).to.have.property(\"id\").that.is.a(\"string\");\r",
+									"    pm.expect(pm.environment.get(\"boardID\")).to.eql(jsonData.id);\r",
+									"});\r",
+									"// Test Case 4 : Check if the response contains correct property 'name'\r",
+									"pm.test(\"Check if the response contains correct property 'name'\", function (){\r",
+									"    pm.expect(jsonData).to.have.property(\"name\").that.is.a(\"string\");\r",
+									"    pm.expect(pm.environment.get(\"boardName\")).to.eql(jsonData.name);\r",
+									"});\r",
+									"// Test Case 5 : Check if the response contains property 'url'\r",
+									"pm.test(\"Check if the response contains correct property 'url'\", function (){\r",
+									"    pm.expect(jsonData).to.have.property(\"url\").that.is.a(\"string\");\r",
+									"});\r",
+									"// Test Case 6 : Check if the response contains property 'members'\r",
+									"pm.test(\"Check if the response contains property 'members'\", function (){\r",
+									"    pm.expect(jsonData).to.have.property(\"members\").that.is.an(\"array\").and.not.empty;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/{{boardID}}/members/{{memberID}}?key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}",
+								"members",
+								"{{memberID}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove member from a board - not a member",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.text();\r",
+									"\r",
+									"// Test Case 7 : Verify that the response code is 401 unauthorized\r",
+									"pm.test(\"Verify that the response code is 401 unauthorized\", function (){\r",
+									"    pm.response.to.have.status(401); // Unauthorized\r",
+									"});\r",
+									"// Test Case 8 : Verify that the error message is meaningful - contains 'membership'\r",
+									"pm.test(\"Verify that the error message is meaningful - contains 'membership'\", function (){\r",
+									"    pm.expect(responseData).to.include('membership');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/{{boardID}}/members/{{memberID}}?key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}",
+								"members",
+								"{{memberID}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove member from a board - wrong Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"// Test Case 9 : Verify that the response code is 400 Bad request\r",
+									"pm.test(\"Verify that the response code is 400 Bad request\", function () {\r",
+									"    pm.response.to.have.status(400); // Bad request\r",
+									"});\r",
+									"\r",
+									"// Test Case 10 : Check that the response contains property 'error'\r",
+									"pm.test(\"Check that the response contains property 'error'\", function (){\r",
+									"    pm.expect(jsonData).to.have.property('error');\r",
+									"});\r",
+									"// Test Case 11 : Check that the error message contains 'id'\r",
+									"pm.test(\"Check that the error message contains 'id'\", function (){\r",
+									"    pm.expect(jsonData.message).to.include('id');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/{{boardID}}/members/wrongID?key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}",
+								"members",
+								"wrongID"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete a Board",
+			"item": [
+				{
+					"name": "Delete a Board - success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"// Test Case 1 : Verify that the board is deleted succesfully - status code is 200 Ok\r",
+									"pm.test(\"Verify that the board is deleted succesfully - status code is 200 Ok\",function (){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Test Case 2 : Check if the pop up message is meaningful 'Board deleted successfully'\r",
+									"pm.test(\"Check if the pop up message is meaningful 'Board deleted successfully'\",function (){\r",
+									"    var responseData = pm.response.text();\r",
+									"    pm.expect(responseData).to.include('Board deleted successfully');\r",
+									"    console.log(jsonData);\r",
+									"});\r",
+									"// Test Case 3 : Check that the response contains null\r",
+									"pm.test(\"Check that the response contains null\", function () {\r",
+									"    pm.expect(jsonData._value).to.be.null;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/{{boardID}}?key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Board - Not exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseData = pm.response.text();\r",
+									"// Test Case 4 : Verify that response code is 404 Not found\r",
+									"pm.test(\"Verify that response code is 404 Not found\", function(){\r",
+									"    pm.response.to.have.status(404); // Not found\r",
+									"});\r",
+									"// Test Case 5 : Check that the response coontains 'Not found'\r",
+									"pm.test(\"Check that the response coontains 'Not found'\", function (){\r",
+									"    pm.expect(responseData).to.include('not found');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://api.trello.com/1/boards/{{boardID}}?key={{key}}&token={{token}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"trello",
+								"com"
+							],
+							"path": [
+								"1",
+								"boards",
+								"{{boardID}}"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "{{key}}"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "key",
+			"value": "dfe108a73afc18c19b75895078b73a84",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"type": "string"
+		},
+		{
+			"key": "boardID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "boardName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "memberType",
+			"value": "normal",
+			"type": "string"
+		},
+		{
+			"key": "memberID",
+			"value": "roccoze",
+			"type": "string"
+		}
+	]
+}
