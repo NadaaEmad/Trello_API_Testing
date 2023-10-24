@@ -1,0 +1,699 @@
+{
+	"id": "170b5e82-34cb-434e-bcbc-7b17477d8568",
+	"name": "Trello Assignment",
+	"timestamp": "2023-10-22T19:51:29.378Z",
+	"collection_id": "18927161-9818eeff-8f93-4066-ab0c-3fbed1d37108",
+	"folder_id": 0,
+	"environment_id": "18927161-925f7b71-d7cf-463f-9ef0-ae51130ac48a",
+	"totalPass": 41,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2023-10-22T19:51:22.654Z",
+	"totalFail": 2,
+	"results": [
+		{
+			"id": "6d52f53c-0a27-4d0c-985f-f97e92224cfe",
+			"name": "Create Board - Successfully",
+			"url": "https://api.trello.com/1/boards/?name=testBoard&key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 384,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify that the board is created succesfully": true,
+				"Verify the response has the required name attribute ": true,
+				"Verify that the response contains correct name": true,
+				"Test Case 4 : Verify that closed field is false and permission level is private": true
+			},
+			"testPassFailCounts": {
+				"Verify that the board is created succesfully": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify the response has the required name attribute ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify that the response contains correct name": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Test Case 4 : Verify that closed field is false and permission level is private": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				384
+			],
+			"allTests": [
+				{
+					"Verify that the board is created succesfully": true,
+					"Verify the response has the required name attribute ": true,
+					"Verify that the response contains correct name": true,
+					"Test Case 4 : Verify that closed field is false and permission level is private": true
+				}
+			]
+		},
+		{
+			"id": "4af5a3e3-6a6e-48e4-9351-546ea3737b00",
+			"name": "Create Board -  Missing name",
+			"url": "https://api.trello.com/1/boards/?name=&key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 183,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Verify response status code and error message for missing 'name' parameter": true
+			},
+			"testPassFailCounts": {
+				"Verify response status code and error message for missing 'name' parameter": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				183
+			],
+			"allTests": [
+				{
+					"Verify response status code and error message for missing 'name' parameter": true
+				}
+			]
+		},
+		{
+			"id": "4cfb01ae-9665-4889-a968-56aa41e1f825",
+			"name": "Create Board - Missing API key",
+			"url": "https://api.trello.com/1/boards/?name=&key=&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 179,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Create Board - Missing API Key": true
+			},
+			"testPassFailCounts": {
+				"Create Board - Missing API Key": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				179
+			],
+			"allTests": [
+				{
+					"Create Board - Missing API Key": true
+				}
+			]
+		},
+		{
+			"id": "e428fc44-e749-460b-96b5-b80011c1620d",
+			"name": "Create Board - Missing Token",
+			"url": "https://api.trello.com/1/boards/?name=Board1&key=dfe108a73afc18c19b75895078b73a84&token=",
+			"time": 178,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Create Board - Missing Token": true
+			},
+			"testPassFailCounts": {
+				"Create Board - Missing Token": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				178
+			],
+			"allTests": [
+				{
+					"Create Board - Missing Token": true
+				}
+			]
+		},
+		{
+			"id": "29aed714-a2f6-4a2a-b720-570a9862c1ba",
+			"name": "Update Board - Successfully",
+			"url": "https://api.trello.com/1/boards/65357d3c95eab6e5ae7bbf50?key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 210,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify the response has the required id attribute ": true,
+				"Verify that the response contains correct id": true,
+				"Verify that the response contains correct name": true
+			},
+			"testPassFailCounts": {
+				"Verify the response has the required id attribute ": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify that the response contains correct id": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify that the response contains correct name": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				210
+			],
+			"allTests": [
+				{
+					"Verify the response has the required id attribute ": true,
+					"Verify that the response contains correct id": true,
+					"Verify that the response contains correct name": true
+				}
+			]
+		},
+		{
+			"id": "32346058-0ccf-4f6b-8b6f-f3b7c5e6af86",
+			"name": "Update Board - Wrong id",
+			"url": "https://api.trello.com/1/boards/wrongID?key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 207,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Verify that the response code is 400 Bad Request in case of a wrong id": true
+			},
+			"testPassFailCounts": {
+				"Verify that the response code is 400 Bad Request in case of a wrong id": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				207
+			],
+			"allTests": [
+				{
+					"Verify that the response code is 400 Bad Request in case of a wrong id": true
+				}
+			]
+		},
+		{
+			"id": "dc3255e1-3773-4f97-b111-56dd01e8c46c",
+			"name": "Update Board - Null id",
+			"url": "https://api.trello.com/1/boards/?key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 177,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Verify that the response code is 404 Not Found in case of a null id": true,
+				"Verify that the response contains a meaningful message contains 'id'": false
+			},
+			"testPassFailCounts": {
+				"Verify that the response code is 404 Not Found in case of a null id": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify that the response contains a meaningful message contains 'id'": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				177
+			],
+			"allTests": [
+				{
+					"Verify that the response code is 404 Not Found in case of a null id": true,
+					"Verify that the response contains a meaningful message contains 'id'": false
+				}
+			]
+		},
+		{
+			"id": "b7b157fc-7cb0-4355-bf9f-be1334c679d4",
+			"name": "Add Member to a Board - Successfully",
+			"url": "https://api.trello.com/1/boards/65357d3c95eab6e5ae7bbf50/members/roccoze?type=normal&key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 463,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify New Member Added": true,
+				"Verify member type is correct": true,
+				"Verify member added to the right board": true
+			},
+			"testPassFailCounts": {
+				"Verify New Member Added": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify member type is correct": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify member added to the right board": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				463
+			],
+			"allTests": [
+				{
+					"Verify New Member Added": true,
+					"Verify member type is correct": true,
+					"Verify member added to the right board": true
+				}
+			]
+		},
+		{
+			"id": "82ef91f2-5af7-405c-bce4-039fbbc51ee7",
+			"name": "Add a member to a Board - Wrong member id",
+			"url": "https://api.trello.com/1/boards/65357d3c95eab6e5ae7bbf50/members/wrongID?type=normal&key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 184,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Verify that the response code is 400 Bad Request in case of a wrong member id": true,
+				"Check if the response has property error and contains id": true
+			},
+			"testPassFailCounts": {
+				"Verify that the response code is 400 Bad Request in case of a wrong member id": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if the response has property error and contains id": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				184
+			],
+			"allTests": [
+				{
+					"Verify that the response code is 400 Bad Request in case of a wrong member id": true,
+					"Check if the response has property error and contains id": true
+				}
+			]
+		},
+		{
+			"id": "f70dc2c6-39d8-4b2f-9862-1c56c80eb6a7",
+			"name": "Add a member to a Board - Wrong member type",
+			"url": "https://api.trello.com/1/boards/65357d3c95eab6e5ae7bbf50/members/roccoze?type=wrongType&key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 193,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Verify that the response code is 400 Bad Request in case of a wrong member type": true,
+				"Check if the error message contains 'type'": true
+			},
+			"testPassFailCounts": {
+				"Verify that the response code is 400 Bad Request in case of a wrong member type": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if the error message contains 'type'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				193
+			],
+			"allTests": [
+				{
+					"Verify that the response code is 400 Bad Request in case of a wrong member type": true,
+					"Check if the error message contains 'type'": true
+				}
+			]
+		},
+		{
+			"id": "3a18b715-6a40-4881-b98a-7770131a46bd",
+			"name": "Get members of a board - successfully",
+			"url": "https://api.trello.com/1/boards/65357d3c95eab6e5ae7bbf50/members?key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 204,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify that the members retrieved successfully - array is not empty": true,
+				"Verify that member data contains id": true,
+				"erify that member data contains fullName": true,
+				"erify that member data contains username": true
+			},
+			"testPassFailCounts": {
+				"Verify that the members retrieved successfully - array is not empty": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify that member data contains id": {
+					"pass": 1,
+					"fail": 0
+				},
+				"erify that member data contains fullName": {
+					"pass": 1,
+					"fail": 0
+				},
+				"erify that member data contains username": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				204
+			],
+			"allTests": [
+				{
+					"Verify that the members retrieved successfully - array is not empty": true,
+					"Verify that member data contains id": true,
+					"erify that member data contains fullName": true,
+					"erify that member data contains username": true
+				}
+			]
+		},
+		{
+			"id": "48caf3c4-3ffb-4dad-a599-fcb9a47c3e9e",
+			"name": "Get members of a board - invalid board id",
+			"url": "https://api.trello.com/1/boards/wrongID/members?key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 188,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Retrieve Board Members - Invalid Board ID": true,
+				"Check if the error message contains 'id'": true
+			},
+			"testPassFailCounts": {
+				"Retrieve Board Members - Invalid Board ID": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if the error message contains 'id'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				188
+			],
+			"allTests": [
+				{
+					"Retrieve Board Members - Invalid Board ID": true,
+					"Check if the error message contains 'id'": true
+				}
+			]
+		},
+		{
+			"id": "f17ef05b-e576-4252-8476-c145c0b08209",
+			"name": "Remove member from a board - success",
+			"url": "https://api.trello.com/1/boards/65357d3c95eab6e5ae7bbf50/members/roccoze?key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 413,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify that the member is deleted successfully and the response code is 200": true,
+				"Verify that the member is no longer in the members list": true,
+				"Check if the response contains correct property 'id'": true,
+				"Check if the response contains correct property 'name'": true,
+				"Check if the response contains correct property 'url'": true,
+				"Check if the response contains property 'members'": true
+			},
+			"testPassFailCounts": {
+				"Verify that the member is deleted successfully and the response code is 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify that the member is no longer in the members list": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if the response contains correct property 'id'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if the response contains correct property 'name'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if the response contains correct property 'url'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if the response contains property 'members'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				413
+			],
+			"allTests": [
+				{
+					"Verify that the member is deleted successfully and the response code is 200": true,
+					"Verify that the member is no longer in the members list": true,
+					"Check if the response contains correct property 'id'": true,
+					"Check if the response contains correct property 'name'": true,
+					"Check if the response contains correct property 'url'": true,
+					"Check if the response contains property 'members'": true
+				}
+			]
+		},
+		{
+			"id": "0404156b-7598-4f82-8687-fe962c2c3fa0",
+			"name": "Remove member from a board - not a member",
+			"url": "https://api.trello.com/1/boards/65357d3c95eab6e5ae7bbf50/members/roccoze?key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 207,
+			"responseCode": {
+				"code": 401,
+				"name": "Unauthorized"
+			},
+			"tests": {
+				"Verify that the response code is 401 unauthorized": true,
+				"Verify that the error message is meaningful - contains 'membership'": true
+			},
+			"testPassFailCounts": {
+				"Verify that the response code is 401 unauthorized": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Verify that the error message is meaningful - contains 'membership'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				207
+			],
+			"allTests": [
+				{
+					"Verify that the response code is 401 unauthorized": true,
+					"Verify that the error message is meaningful - contains 'membership'": true
+				}
+			]
+		},
+		{
+			"id": "b4ad99ae-5b6c-4e72-8e31-b08854115941",
+			"name": "Remove member from a board - wrong Id",
+			"url": "https://api.trello.com/1/boards/65357d3c95eab6e5ae7bbf50/members/wrongID?key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 183,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Verify that the response code is 400 Bad request": true,
+				"Check that the response contains property 'error'": true,
+				"Check that the error message contains 'id'": true
+			},
+			"testPassFailCounts": {
+				"Verify that the response code is 400 Bad request": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check that the response contains property 'error'": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check that the error message contains 'id'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				183
+			],
+			"allTests": [
+				{
+					"Verify that the response code is 400 Bad request": true,
+					"Check that the response contains property 'error'": true,
+					"Check that the error message contains 'id'": true
+				}
+			]
+		},
+		{
+			"id": "42016a36-a97d-4116-96bb-babdff848e3e",
+			"name": "Delete a Board - success",
+			"url": "https://api.trello.com/1/boards/65357d3c95eab6e5ae7bbf50?key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 936,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Verify that the board is deleted succesfully - status code is 200 Ok": true,
+				"Check if the pop up message is meaningful 'Board deleted successfully'": false,
+				"Check that the response contains null": true
+			},
+			"testPassFailCounts": {
+				"Verify that the board is deleted succesfully - status code is 200 Ok": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check if the pop up message is meaningful 'Board deleted successfully'": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Check that the response contains null": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				936
+			],
+			"allTests": [
+				{
+					"Verify that the board is deleted succesfully - status code is 200 Ok": true,
+					"Check if the pop up message is meaningful 'Board deleted successfully'": false,
+					"Check that the response contains null": true
+				}
+			]
+		},
+		{
+			"id": "a2d5f80c-ab3a-4758-b869-a3420822a5a2",
+			"name": "Delete Board - Not exist",
+			"url": "https://api.trello.com/1/boards/65357d3c95eab6e5ae7bbf50?key=dfe108a73afc18c19b75895078b73a84&token=ATTA72f3bea43c84c38f2ad19e87fb97bcbe78afaed97d067e18fc0efda4d7807424A8BE81DD",
+			"time": 185,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Verify that response code is 404 Not found": true,
+				"Check that the response coontains 'Not found'": true
+			},
+			"testPassFailCounts": {
+				"Verify that response code is 404 Not found": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Check that the response coontains 'Not found'": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				185
+			],
+			"allTests": [
+				{
+					"Verify that response code is 404 Not found": true,
+					"Check that the response coontains 'Not found'": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 4674,
+	"collection": {
+		"requests": [
+			{
+				"id": "6d52f53c-0a27-4d0c-985f-f97e92224cfe",
+				"method": "POST"
+			},
+			{
+				"id": "4af5a3e3-6a6e-48e4-9351-546ea3737b00",
+				"method": "POST"
+			},
+			{
+				"id": "4cfb01ae-9665-4889-a968-56aa41e1f825",
+				"method": "POST"
+			},
+			{
+				"id": "e428fc44-e749-460b-96b5-b80011c1620d",
+				"method": "POST"
+			},
+			{
+				"id": "29aed714-a2f6-4a2a-b720-570a9862c1ba",
+				"method": "PUT"
+			},
+			{
+				"id": "32346058-0ccf-4f6b-8b6f-f3b7c5e6af86",
+				"method": "PUT"
+			},
+			{
+				"id": "dc3255e1-3773-4f97-b111-56dd01e8c46c",
+				"method": "PUT"
+			},
+			{
+				"id": "b7b157fc-7cb0-4355-bf9f-be1334c679d4",
+				"method": "PUT"
+			},
+			{
+				"id": "82ef91f2-5af7-405c-bce4-039fbbc51ee7",
+				"method": "PUT"
+			},
+			{
+				"id": "f70dc2c6-39d8-4b2f-9862-1c56c80eb6a7",
+				"method": "PUT"
+			},
+			{
+				"id": "3a18b715-6a40-4881-b98a-7770131a46bd",
+				"method": "GET"
+			},
+			{
+				"id": "48caf3c4-3ffb-4dad-a599-fcb9a47c3e9e",
+				"method": "GET"
+			},
+			{
+				"id": "f17ef05b-e576-4252-8476-c145c0b08209",
+				"method": "DELETE"
+			},
+			{
+				"id": "0404156b-7598-4f82-8687-fe962c2c3fa0",
+				"method": "DELETE"
+			},
+			{
+				"id": "b4ad99ae-5b6c-4e72-8e31-b08854115941",
+				"method": "DELETE"
+			},
+			{
+				"id": "42016a36-a97d-4116-96bb-babdff848e3e",
+				"method": "DELETE"
+			},
+			{
+				"id": "a2d5f80c-ab3a-4758-b869-a3420822a5a2",
+				"method": "DELETE"
+			}
+		]
+	}
+}
